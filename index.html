@@ -1,28 +1,45 @@
 <meta charset="utf-8">
 <!-- форма с которой читаем значения -->
 <input id="audio" type="text"></input>
-<button onclick="audio(b=1)">Play</button>
-<button onclick="audio(b=2)">Pause</button>
-<button onclick="stop()">Stop all</button>
+<!--
+example values (from https://en.wikipedia.org/wiki/HTML5_Audio):
+  http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp4
+  http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.oga
+-->
+<button onclick="play()">Play</button>
+<button onclick="pause()">Pause</button>
+<button onclick="stopAndAlert()">Stop all</button>
 <script>
-var a=0;
-function audio(){
-//получаем id
-var doc = document.getElementById("audio");
-//получаем значение с формы
-var p=doc.value;
-//создаем аудио объект
-var a= new Audio(p);
+var audio = new Audio();
 
-if(b==1){
-a.play();
+function play(){
+  //получаем input field
+  var audioInput = document.getElementById('audio');
+
+  //получаем значение с формы
+  var url = audioInput.value;
+
+  //создаем аудио объект if needed
+  if (audio.src !== url) {
+    stop();
+    audio.src = url;
+  }
+  audio.play();
 }
-if(b==2){
-a.pause();
+
+function pause() {
+  audio.pause();
 }
-}
+
 function stop(){
-window.open("alpha.html");
-alert("Остановлено!");
+  audio.pause();
+  audio.currentTime = 0.0;
+  audio.src = '';
+}
+
+function stopAndAlert() {
+  stop();
+  window.open('alpha.html');
+  alert('Остановлено!');
 }
 </script>
