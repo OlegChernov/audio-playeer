@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<!-- форма с которой читаем значения -->
+<input id="audio" type="text"></input>
+<button onclick="audio(b=1)">Play</button>
+<button onclick="audio(b=2)">Pause</button>
+<button onclick="stop()">Stop all</button>
+<script>
+var a=0;
+function audio(){
+//получаем id
+var doc = document.getElementById("audio");
+//получаем значение с формы
+var p=doc.value;
+//создаем аудио объект
+var a= new Audio(p);
+
+if(b==1){
+a.play();
+}
+if(b==2){
+a.pause();
+}
+}
+function stop(){
+window.open("alpha.html");
+alert("Остановлено!");
+}
+</script>
